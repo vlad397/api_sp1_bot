@@ -15,18 +15,18 @@ PRAKTIKUM_TOKEN = os.getenv("PRAKTIKUM_TOKEN")
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 bot_client = telegram.Bot(token=TELEGRAM_TOKEN)
+statuses = {
+            "rejected": "К сожалению в работе нашлись ошибки.",
+            "reviewing": "Работа отправлена на ревью.",
+            "approved": "Ревьюеру всё понравилось, "
+                        "можно приступать к следующему уроку."
+        }
 
 
 def parse_homework_status(homework):
     try:
         homework_name = homework["homework_name"]
         status = homework["status"]
-        statuses = {
-            "rejected": "К сожалению в работе нашлись ошибки.",
-            "reviewing": "Работа отправлена на ревью.",
-            "approved": "Ревьюеру всё понравилось, "
-                        "можно приступать к следующему уроку."
-        }
         if status not in statuses:
             verdict = 'Статус неизвестен'
             logging.error('Статус неизвестен')
@@ -35,7 +35,6 @@ def parse_homework_status(homework):
         return f'У вас проверили работу "{homework_name}"!\n\n{verdict}'
     except KeyError as k:
         logging.error(k)
-        send_message(f'Возникла ошибка - {k}', bot_client)
         return 'Возникла ошибка'
 
 
