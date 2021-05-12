@@ -16,11 +16,11 @@ TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 bot_client = telegram.Bot(token=TELEGRAM_TOKEN)
 statuses = {
-            "rejected": "К сожалению в работе нашлись ошибки.",
-            "reviewing": "Работа отправлена на ревью.",
-            "approved": "Ревьюеру всё понравилось, "
-                        "можно приступать к следующему уроку."
-        }
+    "rejected": "К сожалению в работе нашлись ошибки.",
+    "reviewing": "Работа отправлена на ревью.",
+    "approved": "Ревьюеру всё понравилось, "
+                "можно приступать к следующему уроку."
+}
 
 
 def parse_homework_status(homework):
